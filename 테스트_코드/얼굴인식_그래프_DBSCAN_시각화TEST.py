@@ -61,18 +61,19 @@ while True:
 #print(temp_W_H)
 cap.release()
 cv2.destroyAllWindows()
-
-
-###########################################################dbscan##
-dbscan = DBSCAN(min_samples=3, eps=20)
-clusters = dbscan.fit_predict(face_points)
-print(clusters)
-
-plt.scatter(face_points[:, 0], face_points[:, 1], c=clusters,marker='o', s=10)
-plt.xlabel("$X_1$")
-plt.ylabel("$X_2$")
-plt.show()
-###########################################################dbscan#
+if face_points.tolist(): ##리스트가 비어있을 경우 에러가남 예외처리
+    
+    
+    ###########################################################dbscan##
+    dbscan = DBSCAN(min_samples=3, eps=20)
+    clusters = dbscan.fit_predict(face_points)
+    print(clusters)
+    
+    plt.scatter(face_points[:, 0], face_points[:, 1], c=clusters,marker='o', s=10)
+    plt.xlabel("$X_1$")
+    plt.ylabel("$X_2$")
+    plt.show()
+    ###########################################################dbscan#
 
 
 
