@@ -2,14 +2,6 @@ from matplotlib import pyplot as plt
 from sklearn.cluster import DBSCAN
 from sklearn.datasets import make_blobs
 from sklearn.datasets import make_moons
-#import sklearn
-'''
-X, y = make_blobs(random_state=0, n_samples=12)
-
-dbscan = DBSCAN()
-clusters = dbscan.fit_predict(X)
-print("클러스터 레이블:\n{}".format(clusters))
-'''
 
 import cv2
 import numpy as np
