@@ -14,7 +14,7 @@ print("클러스터 레이블:\n{}".format(clusters))
 import cv2
 import numpy as np
 cap= cv2.VideoCapture(0)
-body_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
+body_cascade = cv2.CascadeClassifier('../haarcascade_frontalface_default.xml')
 
 #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
@@ -22,7 +22,7 @@ body_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
  #   exit()
 
 face_points = np.empty((0,2) , int)
-
+temp_W_H = []
  
 i = 0;
 
@@ -39,25 +39,32 @@ while True:
         body = body_cascade.detectMultiScale(img, 1.01, 10)
         for (x,y,w,h) in body:
             
-            face_points = np.append(face_points, np.array([[x+int(w/2),y+int(h/2)]]),axis=0)
+            
+            if w>100 and h>100:
+                face_points = np.append(face_points, np.array([[x+int(w/2),y+int(h/2)]]),axis=0)
+            
+            
+            
+            #temp_W_H.append([w,h])
             
             cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),3)
             cv2.line(img,(x+int(w/2),y+int(h/2)),(x+int(w/2),y+int(h/2)),(0,255,0),5)
     i+=1
-    if i>20:
+    if i>5:
         break
             
 
     cv2.imshow("VideoFrame",img)
     if cv2.waitKey(10)>=0:break
 
-print(face_points)
+#print(face_points)
+#print(temp_W_H)
 cap.release()
 cv2.destroyAllWindows()
 
 
 ###########################################################dbscan##
-dbscan = DBSCAN(min_samples=16, eps=20)
+dbscan = DBSCAN(min_samples=3, eps=20)
 clusters = dbscan.fit_predict(face_points)
 print(clusters)
 
