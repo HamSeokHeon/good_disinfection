@@ -14,7 +14,7 @@ print("클러스터 레이블:\n{}".format(clusters))
 import cv2
 import numpy as np
 cap= cv2.VideoCapture(0)
-body_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
+body_cascade = cv2.CascadeClassifier('../haarcascade_frontalface_default.xml')
 
 #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
